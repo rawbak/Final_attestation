@@ -479,4 +479,25 @@ Query OK, 1 row affected (0.02 sec)
 SELECT * FROM Camels;
 Empty set (0.00 sec)
 ~~~~
+~~~~sql
+# объединение таблиц лошадей и ослов
 
+CREATE TABLE HorsesAndDonkeys AS
+     SELECT id_horse AS id, name, birth_day, commands, 'Horse' AS type FROM Horses
+     UNION
+     SELECT id_donkey AS id, name, birth_day, commands, 'Donkey' AS type FROM Donkeys; 
+Query OK, 2 rows affected (0.06 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+~~~~
+~~~~sql
+# проверка
+
+SELECT * FROM HorsesAndDonkeys;
++----+---------+------------+----------+--------+
+| id | name    | birth_day  | commands | type   |
++----+---------+------------+----------+--------+
+|  1 | Thunder | 2017-04-20 | run      | Horse  |
+|  1 | Eeyore  | 2022-03-15 | carry    | Donkey |
++----+---------+------------+----------+--------+
+2 rows in set (0.00 sec)
+~~~~
