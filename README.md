@@ -165,4 +165,52 @@ db@db-VirtualBox:~/work$ history > commands_history_for_final_attestation.txt
 
    ![Диаграмма_классов ](https://github.com/user-attachments/assets/b3ea1fd2-2b07-4887-9b88-e511c884d7b5)
 
-   
+~~~~sql
+   HumanFriends
+  - id_human_friend
+  - type_human_friend
+
+Pets (наследует от HumanFriends)
+  - id_pet
+  - type_pet
+
+  Dogs (наследует от Pets)
+    - id_dog
+    - name
+    - birth_day
+    - commands
+
+  Cats (наследует от Pets)
+    - id_cat
+    - name
+    - birth_day
+    - commands
+
+  Hamsters (наследует от Pets)
+    - id_hamster
+    - name
+    - birth_day
+    - commands
+
+PackAnimals (наследует от HumanFriends)
+  - id_pack_animal
+  - type_pack_animal
+
+  Horses (наследует от PackAnimals)
+    - id_horse
+    - name
+    - birth_day
+    - commands
+
+  Camels (наследует от PackAnimals)
+    - id_camel
+    - name
+    - birth_day
+    - commands
+
+  Donkeys (наследует от PackAnimals)
+    - id_donkey
+    - name
+    - birth_day
+    - commands
+~~~~
