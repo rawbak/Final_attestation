@@ -214,3 +214,41 @@ PackAnimals (наследует от HumanFriends)
     - birth_day
     - commands
 ~~~~
+
+7. В подключенном MySQL репозитории создать базу данных “Друзья
+человека”
+
+~~~~sql
+db@db-VirtualBox:~$ sudo mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.40-0ubuntu0.24.10.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE database HumanFriends;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE HumanFriends;
+Database changed
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| HumanFriends       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+~~~~
+
+
