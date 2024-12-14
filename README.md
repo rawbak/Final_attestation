@@ -162,5 +162,7 @@ db@db-VirtualBox:~/work$ history > commands_history_for_final_attestation.txt
    животные и вьючные животные, в составы которых в случае домашних
    животных войдут классы: собаки, кошки, хомяки, а в класс вьючные животные
    войдут: Лошади, верблюды и ослы).
-   
+
+   ![Диаграмма_классов ](https://github.com/user-attachments/assets/b3ea1fd2-2b07-4887-9b88-e511c884d7b5)
+
    
