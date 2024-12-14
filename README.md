@@ -501,3 +501,72 @@ SELECT * FROM HorsesAndDonkeys;
 +----+---------+------------+----------+--------+
 2 rows in set (0.00 sec)
 ~~~~
+11. Создать новую таблицу “молодые животные” в которую попадут все животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью до месяца подсчитать возраст животных в новой таблице.
+
+~~~~sql
+# создание новой таблицы для животных в возрасте от 1 до 3 лет
+
+CREATE TABLE YoungAnimals AS
+     SELECT id, name, birth_day, commands, type,
+            TIMESTAMPDIFF(MONTH, birth_day, CURDATE()) AS age_in_months
+     FROM (
+         SELECT id_cat AS id, name, birth_day, commands, 'Cat' AS type FROM Cats
+         UNION ALL
+         SELECT id_dog AS id, name, birth_day, commands, 'Dog' AS type FROM Dogs
+         UNION ALL
+         SELECT id_hamster AS id, name, birth_day, commands, 'Hamster' AS type FROM Hamsters
+         UNION ALL
+         SELECT id AS id, name, birth_day, commands, type FROM HorsesAndDonkeys
+     ) AS AllAnimals
+     WHERE TIMESTAMPDIFF(MONTH, birth_day, CURDATE()) BETWEEN 12 AND 36;
+Query OK, 1 row affected (0.06 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+~~~~
+~~~~sql
+# проверка
+
+SELECT * FROM YoungAnimals;
++----+--------+------------+----------+--------+---------------+
+| id | name   | birth_day  | commands | type   | age_in_months |
++----+--------+------------+----------+--------+---------------+
+|  1 | Eeyore | 2022-03-15 | carry    | Donkey |            32 |
++----+--------+------------+----------+--------+---------------+
+1 row in set (0.00 sec)
+~~~~
+
+12. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на прошлую принадлежность к старым таблицам.
+
+~~~~sql
+# объединение всех созданных таблиц в одну
+
+CREATE TABLE AllAnimals AS
+     SELECT id_cat AS id, name, birth_day, commands, 'Cat' AS type FROM Cats
+     UNION
+     SELECT id_dog AS id, name, birth_day, commands, 'Dog' AS type FROM Dogs
+     UNION
+     SELECT id_hamster AS id, name, birth_day, commands, 'Hamster' AS type FROM Hamsters
+     UNION
+     SELECT id AS id, name, birth_day, commands, type FROM HorsesAndDonkeys
+     UNION
+     SELECT id AS id, name, birth_day, commands, type FROM YoungAnimals;
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+~~~~
+~~~~sql
+# проверка
+
+SELECT * FROM AllAnimals;
++----+----------+------------+------------+---------+
+| id | name     | birth_day  | commands   | type    |
++----+----------+------------+------------+---------+
+|  1 | Whiskers | 2019-03-01 | sit, jump  | Cat     |
+|  1 | Rex      | 2021-05-10 | fetch, sit | Dog     |
+|  1 | Nibbles  | 2024-04-29 | run        | Hamster |
+|  1 | Thunder  | 2017-04-20 | run        | Horse   |
+|  1 | Eeyore   | 2022-03-15 | carry      | Donkey  |
++----+----------+------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> exit
+~~~~
+
