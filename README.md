@@ -352,3 +352,38 @@ SHOW TABLES;
 9 rows in set (0.00 sec)
 ~~~~
 
+9. Заполнить низкоуровневые таблицы именами(животных), командами которые они выполняют и датами рождения.
+
+~~~~sql
+# заполнение таблиц данными
+
+INSERT INTO HumanFriends (type_human_friend) VALUES ('Pet'), ('PackAnimal');
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+INSERT INTO Pets (type_pet, id_human_friend) VALUES ('Cat', 1), ('Dog', 1), ('Hamster', 1);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+INSERT INTO PackAnimals (type_pack_animal, id_human_friend) VALUES ('Horse', 2), ('Camel', 2), ('Donkey', 2);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+INSERT INTO Cats (name, birth_day, commands, id_pet) VALUES ('Whiskers', '2019-03-01', 'sit, jump', 1);
+Query OK, 1 row affected (0.01 sec)
+
+INSERT INTO Dogs (name, birth_day, commands, id_pet) VALUES ('Rex', '2021-05-10', 'fetch, sit', 2);
+Query OK, 1 row affected (0.01 sec)
+
+INSERT INTO Hamsters (name, birth_day, commands, id_pet) VALUES ('Nibbles', '2024-04-29', 'run', 3);
+Query OK, 1 row affected (0.02 sec)
+
+INSERT INTO Horses (name, birth_day, commands, id_pack_animal) VALUES ('Thunder', '2017-04-20', 'run', 1);
+Query OK, 1 row affected (0.01 sec)
+
+INSERT INTO Camels (name, birth_day, commands, id_pack_animal) VALUES ('Sandy', '2018-09-11', 'carry', 2);
+Query OK, 1 row affected (0.01 sec)
+
+INSERT INTO Donkeys (name, birth_day, commands, id_pack_animal) VALUES ('Eeyore', '2022-03-15', 'carry', 3);
+Query OK, 1 row affected (0.01 sec)
+~~~~
