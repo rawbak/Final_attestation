@@ -250,5 +250,105 @@ mysql> SHOW DATABASES;
 +--------------------+
 5 rows in set (0.00 sec)
 ~~~~
+8. Создать таблицы с иерархией из диаграммы в БД
 
+~~~~sql
+CREATE TABLE HumanFriends (
+         id_human_friend INT AUTO_INCREMENT PRIMARY KEY,
+         type_human_friend VARCHAR(255)
+     );
+Query OK, 0 rows affected (0.16 sec)
+
+CREATE TABLE Pets (
+         id_pet INT AUTO_INCREMENT PRIMARY KEY,
+         type_pet VARCHAR(255),
+         id_human_friend INT,
+         FOREIGN KEY (id_human_friend) REFERENCES HumanFriends(id_human_friend)
+     );
+Query OK, 0 rows affected (0.06 sec)
+
+CREATE TABLE PackAnimals (
+         id_pack_animal INT AUTO_INCREMENT PRIMARY KEY,
+         type_pack_animal VARCHAR(255),
+         id_human_friend INT,
+         FOREIGN KEY (id_human_friend) REFERENCES HumanFriends(id_human_friend)
+     );
+Query OK, 0 rows affected (0.08 sec)
+
+CREATE TABLE Cats (
+         id_cat INT AUTO_INCREMENT PRIMARY KEY,
+         name VARCHAR(255),
+         birth_day DATE,
+         commands TEXT,
+         id_pet INT,
+         FOREIGN KEY (id_pet) REFERENCES Pets(id_pet)
+     );
+Query OK, 0 rows affected (0.08 sec)
+
+CREATE TABLE Dogs (
+         id_dog INT AUTO_INCREMENT PRIMARY KEY,
+         name VARCHAR(255),
+         birth_day DATE,
+         commands TEXT,
+         id_pet INT,
+         FOREIGN KEY (id_pet) REFERENCES Pets(id_pet)
+     );
+Query OK, 0 rows affected (0.05 sec)
+
+CREATE TABLE Hamsters (
+         id_hamster INT AUTO_INCREMENT PRIMARY KEY,
+         name VARCHAR(255),
+         birth_day DATE,
+         commands TEXT,
+         id_pet INT,
+         FOREIGN KEY (id_pet) REFERENCES Pets(id_pet)
+     );
+Query OK, 0 rows affected (0.06 sec)
+
+CREATE TABLE Horses (
+         id_horse INT AUTO_INCREMENT PRIMARY KEY,
+         name VARCHAR(255),
+         birth_day DATE,
+         commands TEXT,
+         id_pack_animal INT,
+         FOREIGN KEY (id_pack_animal) REFERENCES PackAnimals(id_pack_animal)
+     );
+Query OK, 0 rows affected (0.06 sec)
+
+CREATE TABLE Camels (
+         id_camel INT AUTO_INCREMENT PRIMARY KEY,
+         name VARCHAR(255),
+         birth_day DATE,
+         commands TEXT,
+         id_pack_animal INT,
+         FOREIGN KEY (id_pack_animal) REFERENCES PackAnimals(id_pack_animal)
+     );
+Query OK, 0 rows affected (0.06 sec)
+
+CREATE TABLE Donkeys (
+         id_donkey INT AUTO_INCREMENT PRIMARY KEY,
+         name VARCHAR(255),
+         birth_day DATE,
+         commands TEXT,
+         id_pack_animal INT,
+         FOREIGN KEY (id_pack_animal) REFERENCES PackAnimals(id_pack_animal)
+     );
+Query OK, 0 rows affected (0.43 sec)
+
+SHOW TABLES;
++------------------------+
+| Tables_in_HumanFriends |
++------------------------+
+| Camels                 |
+| Cats                   |
+| Dogs                   |
+| Donkeys                |
+| Hamsters               |
+| Horses                 |
+| HumanFriends           |
+| PackAnimals            |
+| Pets                   |
++------------------------+
+9 rows in set (0.00 sec)
+~~~~
 
